@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 function SigninForm() {
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +22,7 @@ function SigninForm() {
     .then(res => res.data)
     .then(data => {
       localStorage.setItem("token", data.accessToken);
-      window.location.href = '/dashboard';
+      navigate('/dashboard');
     })
     .catch(err => console.log(err))
   }

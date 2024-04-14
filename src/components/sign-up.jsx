@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 function SignupForm() {
+  const navigate = useNavigate();
+    
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -18,9 +21,8 @@ function SignupForm() {
     e.preventDefault();
     axios.post('https://assignment-backend-1-4g7d.onrender.com/signup', {username, password})
     .then(res => {
-      console.log(res);
-      alert('Signed UP!');
-      // redirect to somewhere?
+      localStorage.setItem("token", data.accessToken);
+      navigate('/dashboard');
     }) 
     .catch(err => console.log(err))
   }
